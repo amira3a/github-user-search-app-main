@@ -12,18 +12,24 @@ const Main = () => {
     setChoice(newUser);
   };
 
-  const fetchUserHandler = async () => {
+  const fetchUserHandler = useCallback(async () => {
     setError("");
 
-    
+    try {
       const response = await fetch(`https://api.github.com/users/${choice}`);
 
-      
+      if (!response.ok) {
+        throw new Error();
+      }
 
       const newUser = await response.json();
 
       setUser(newUser);
-    } 
+    } catch (err) {
+      console.log(err.message);
+      setError("No results");
+    }
+  }, [choice]);
   
 
   useEffect(() => {
