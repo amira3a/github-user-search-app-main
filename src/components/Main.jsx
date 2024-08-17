@@ -26,7 +26,6 @@ const Main = () => {
 
       setUser(newUser);
     } catch (err) {
-      console.log(err.message);
       setError("No results");
     }
   }, [choice]);
